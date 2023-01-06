@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, useParams } from "react-router";
-import { getTodos } from "../Data/data.jsx";
+import { getTodos } from "../../component/Data/data.jsx";
 
 function ListToDo(props) {
   let params = useParams();

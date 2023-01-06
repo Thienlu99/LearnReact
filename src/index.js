@@ -6,7 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Todo from "./features/Todo";
 import Photo from "./features/Photo";
-import ListToDo from "./features/Todo/component/ListToDo/ListToDo";
+import ListToDo from "./features/Todo/page/ListToDo/ListToDo";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

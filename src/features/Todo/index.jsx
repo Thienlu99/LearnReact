@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import ButonTodo from "./component/ButtonTodo";
 import TodoList from "./component/TodoList";
 import todos from "./component/Data/data.jsx";
 import { Link } from "react-router-dom";
+import queryString from "query-string";
 
 // Todo.propTypes = {
 
@@ -27,6 +28,8 @@ function Todo(props) {
       status: "new",
     },
   ];
+  //URL
+  const location = useLocation();
   //
   // let data = [
   //     {
@@ -45,7 +48,12 @@ function Todo(props) {
   //     }
   // ]
   const [todoList, setTodoList] = useState(initTodoList);
-  const [fiterStatus, setfiterStatus] = useState("all");
+  const [fiterStatus, setfiterStatus] = useState(()=>{
+    const params = queryString.parse(location.search);
+    // window.location.search
+    console.log(params)
+    return params.status || "all"
+  });
 
   const handleTodoClick = (todo, index) => {
     // console.log(todo,index)

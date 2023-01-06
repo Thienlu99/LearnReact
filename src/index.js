@@ -1,12 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import Todo from "./features/Todo";
+import Photo from "./features/Photo";
+import ListToDo from "./features/Todo/component/ListToDo/ListToDo";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <h2>Header</h2>
+      <Link to="/todos">Todo</Link>
+      <br />
+      <Link to="/album">Album</Link>
+      <Routes>
+        <Route path="/" element={<App />}></Route>
+        <Route path="/todos" element={<Todo />}>
+          {/* <Route path=":todosid" element={<ListToDo />}
+            /> */}
+          <Route index element={<div>Mời bạn chọn TodoList</div>}></Route>
+          <Route path="/todos/:todosid" element={<ListToDo />} />
+        </Route>
+        {/* <Route path="/todos/:todosid" element={<ListToDo />} /> */}
+        <Route path="/album" element={<Photo />} />
+        <Route
+          path="*"
+          element={<div style={{ fontSize: "100px" }}>Not Found!!!!</div>}
+        />
+      </Routes>
+      <h2>Footer</h2>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

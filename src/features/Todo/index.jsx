@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Outlet, useLocation } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Outlet, useLocation} from "react-router";
 import ButonTodo from "./component/ButtonTodo";
 import TodoList from "./component/TodoList";
 import todos from "./component/Data/data.jsx";
@@ -30,23 +31,8 @@ function Todo(props) {
   ];
   //URL
   const location = useLocation();
-  //
-  // let data = [
-  //     {
-  //         id:1,
-  //         name: "Homework",
-
-  //     },
-  //     {
-  //         id:2,
-  //         name: "Action",
-
-  //     },{
-  //         id:3,
-  //         name: "Tiktok",
-
-  //     }
-  // ]
+  const history = useNavigate();
+  // const match = useRoutMatch();
   const [todoList, setTodoList] = useState(initTodoList);
   const [fiterStatus, setfiterStatus] = useState(()=>{
     const params = queryString.parse(location.search);
@@ -54,6 +40,12 @@ function Todo(props) {
     console.log(params)
     return params.status || "all"
   });
+  //update state
+  useEffect(()=>{
+    const params = queryString.parse(location.search);
+    // window.location.search
+    setfiterStatus(params.status || "all")
+  },[location.search])
 
   const handleTodoClick = (todo, index) => {
     // console.log(todo,index)
@@ -73,16 +65,31 @@ function Todo(props) {
   };
   //click button toggle
   const handleButtonAllClick = (index) => {
-    setfiterStatus("all");
-    console.log("1");
+    // setfiterStatus("all");
+    const queryParams = {status: "all"};
+    history({
+      pathname: "/todos",
+      search: queryString.stringify(queryParams),
+    })
+    // console.log("1");
   };
   const handleButtonComClick = (index) => {
-    setfiterStatus("completed");
-    console.log("2");
+    // setfiterStatus("completed");
+    const queryParams = {status: "completed"};
+    history({
+      pathname: "/todos",
+      search: queryString.stringify(queryParams),
+    })
+    // console.log("2");
   };
   const handleButtonNewClick = (index) => {
-    setfiterStatus("new");
-    console.log("3");
+    // setfiterStatus("new");
+    const queryParams = {status: "new"};
+    history({
+      pathname: "/todos",
+      search: queryString.stringify(queryParams),
+    })
+    // console.log("3");
   };
   const renderFiter = todoList.filter(
     (todo) => fiterStatus === "all" || fiterStatus === todo.status

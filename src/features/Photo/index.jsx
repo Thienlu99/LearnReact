@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PhotoList from './component/PhotoList';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewHobby, setActiveHobby } from '../../redux/actions/Hobby';
+import PhotoRadom from './component/PhotoRadom';
 
 Photo.propTypes = {
 };
 
-
+const randomNumber = () =>{
+    return 1000 + Math.trunc((Math.random() * 9000))
+}
 function Photo(props) {
     const albumList = [
         {
@@ -25,10 +30,41 @@ function Photo(props) {
         },
         
     ]
+      // console.log(albumList)
+    // ket noi voi redux-store
+    const hobbyList = useSelector(state => state.hobby.list);
+    const activeId = useSelector(state => state.hobby.activeId)
+    console.log("hobby list: ",hobbyList);
+    //dispatch;
+    const dispatch = useDispatch ();
+
+    const handleAddHobbyClick = () =>{
+        const newId = randomNumber();
+        const newHobby = {
+            id:newId,
+            title: `Hobby ${newId}`
+        }
+
+        const action = addNewHobby(newHobby);
+        dispatch(action); 
+        //nó sẽ lên reducer, nhảy vào thằng ADD-Hobby
+    }
+    const handleHobbyClick =(hobby) =>{
+        const action = setActiveHobby(hobby);
+        dispatch(action);
+    }
     return (
         <div>
         <h2>Nhạc album tất cả</h2>
             <PhotoList  albumList={albumList}/>
+            <h1>
+                Redux-- Hook
+             </h1>
+             <button onClick={()=> handleAddHobbyClick()}>Click </button>
+             <PhotoRadom  hobbyList={hobbyList}
+                activeId={activeId}
+                onHobbyClick={handleHobbyClick}
+             />
         </div>
     );
 }

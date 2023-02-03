@@ -9,7 +9,9 @@ PhotoList.propTypes = {
 
 function PhotoList(props) {
     const {albumList} = props;
-    // console.log(albumList)
+   
+
+    
     return (
         <div>
              <ul className='album-list'>
@@ -22,6 +24,9 @@ function PhotoList(props) {
                     
                 )) }
              </ul>
+
+             
+             
         </div>
     );
 }

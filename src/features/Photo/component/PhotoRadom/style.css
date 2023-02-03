@@ -1,0 +1,7 @@
+ul.hobby-list > li{
+    transition: all 0.35s ease-in-out0s;
+    cursor: pointer;
+}
+ul.hobby-list > li.active{
+    color: crimson;
+}

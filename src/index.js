@@ -7,9 +7,12 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Todo from "./features/Todo";
 import Photo from "./features/Photo";
 import ListToDo from "./features/Todo/page/ListToDo/ListToDo";
+import { Provider } from "react-redux";
+import store from "./Store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <Provider store={store}>
   <React.StrictMode>
     <BrowserRouter>
       <h2>Header</h2>
@@ -34,6 +37,7 @@ root.render(
       <h2>Footer</h2>
     </BrowserRouter>
   </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
